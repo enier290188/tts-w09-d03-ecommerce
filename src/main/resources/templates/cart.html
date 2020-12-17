@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head th:replace="fragments/fragments :: head"></head>
     <body>
-        <div th:replace="fragments/fragments :: navbar"></div>
+        <div th:replace="fragments/fragments :: navbar" ></div>
 
         <!--/*@thymesVar id="cart" type="java.util.Map<com.example.demo.model.Product, java.lang.Integer>"*/-->
         <main role="main">
@@ -23,14 +23,14 @@
                             <td style="width: 10%; padding-left: 0"><img th:src="${product.image}" style="width: 100%; max-height: 80px"/></td>
                             <td th:text="${product.name}"></td>
                             <td>
-                                <input type="hidden" name="id" th:value="${product.id}" form="updateForm"/>
-                                <input type="number" name="quantity" min="0" th:value="${item.value}" form="updateForm"/>
+                                <input type="hidden" name="id" th:value="${product.id}" form="updateForm" />
+                                <input type="number" name="quantity" min="0" th:value="${item.value}" form="updateForm" />
                             </td>
                             <td th:if="${list.add(product.price * item.value)}" th:text="${#numbers.formatCurrency(product.price * item.value)}"></td>
                             <td>
                                 <form th:action="@{/cart}" method="post" style="display: inline">
-                                    <input type="hidden" name="_method" value="DELETE"/>
-                                    <input type="hidden" name="id" th:value="${product.id}"/>
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <input type="hidden" name="id" th:value="${product.id}" />
                                     <button class="btn btn-danger" style="display: inline" type="submit">Delete</button>
                                 </form>
                             </td>
@@ -49,7 +49,7 @@
 
                     <form th:action="@{/cart}" method="post" id="updateForm" th:if="${cart.size() > 0}">
                         <!-- form doesn't support PATCH requests, but this tells Spring Boot to use @PatchMapping anyway. -->
-                        <input type="hidden" name="_method" value="PATCH"/>
+                        <input type="hidden" name="_method" value="PATCH" />
                         <button type="submit" class="btn btn-primary">Update Cart</button>
                     </form>
                     <div th:if="${cart.size() == 0}">Nothing in your cart yet.</div>
@@ -60,5 +60,3 @@
         <div th:replace="fragments/fragments :: footer"></div>
     </body>
 </html>
-
-
